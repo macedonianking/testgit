@@ -5,6 +5,7 @@
 int main(int argc, char **argv)
 {
 	std::cout << "This is a new message" << std::endl;
+	std::cout << "This is a second message and a tab" << std::endl;
 
 	return 0;
 }
