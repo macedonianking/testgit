@@ -4,9 +4,7 @@
 
 int main(int argc, char **argv)
 {
-	std::cout << "This is a new message" << std::endl;
-	std::cout << "This is a second message and a tab" << std::endl;
-	std::cout << "common third message" << std::endl;
+	std::cout << "server fix branch" << std::endl;
 
 	return 0;
 }
