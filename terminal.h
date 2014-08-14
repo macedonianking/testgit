@@ -33,3 +33,4 @@ void terminal_clearscreen();
 void terminal_write_cursor(uint16_t x, uint16_t y);
 void terminal_putchar(char c);
 void terminal_putstring(const char *str);
+void terminal_settextcolor(uint8_t color);
