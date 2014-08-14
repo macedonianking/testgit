@@ -147,3 +147,17 @@ void terminal_putstring(const char *str)
 		terminal_putchar(*str++);
 	}
 }
+
+int terminal_printf(const char *format, ...)
+{
+	va_list args;
+	char buf[MAX_BUFFER_SIZE];
+	int n;
+
+	va_start(args, format);
+	n = vsnprintf(buf, MAX_BUFFER_SIZE, format, args);
+	va_end(args);
+
+	terminal_putstring(buf);
+	return n;
+}

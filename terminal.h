@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 enum vga_color
 {
@@ -34,3 +35,6 @@ void terminal_write_cursor(uint16_t x, uint16_t y);
 void terminal_putchar(char c);
 void terminal_putstring(const char *str);
 void terminal_settextcolor(uint8_t color);
+int terminal_printf(const char *format, ...);
+
+extern int vsnprintf(char *buf, size_t size, const char *fmt, va_list args);

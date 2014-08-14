@@ -6,7 +6,9 @@ CFLAGS	:= -m32 -ffreestanding -nostdlib -Wall
 SRC_FILES := boot.s \
 	kernel.c \
 	terminal.c \
-	system.c
+	system.c \
+	vsprintf.c \
+	ctypes.c
 
 OBJ_FILES := $(patsubst %.c,%.o,$(patsubst %.s,%.c,$(SRC_FILES)))
 BIN_FILES := myos.bin
