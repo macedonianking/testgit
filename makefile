@@ -1,11 +1,12 @@
 CC		:= gcc
 CFLAGS := -ffreestanding -nostdlib 
 QEMU 	:= qemu-system-i386
-CFLAGS	:= -m32 -ffreestanding -nostdlib
+CFLAGS	:= -m32 -ffreestanding -nostdlib -Wall
 
 SRC_FILES := boot.s \
 	kernel.c \
-	terminal.c
+	terminal.c \
+	system.c
 
 OBJ_FILES := $(patsubst %.c,%.o,$(patsubst %.s,%.c,$(SRC_FILES)))
 BIN_FILES := myos.bin
