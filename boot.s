@@ -19,6 +19,7 @@ stack_top:
 .globl	_start
 .type	_start, @function
 _start:
+	cli
 	mov		$stack_top, %esp
 	call	kernel_main
 

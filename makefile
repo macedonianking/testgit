@@ -10,7 +10,8 @@ SRC_FILES := boot.s \
 	system.c \
 	vsprintf.c \
 	ctypes.c \
-	gdt.c 
+	gdt.c \
+	idt.c
 
 OBJ_FILES := $(patsubst %.c,%.o,$(patsubst %.s,%.c,$(SRC_FILES)))
 BIN_FILES := myos.bin
