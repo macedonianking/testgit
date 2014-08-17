@@ -1,4 +1,5 @@
 #include "base.h"
+#include "asm.h"
 #include "idt.h"
 
 extern void  _isr0();
@@ -36,10 +37,8 @@ extern void  _isr31();
 extern void  _isr32();
 extern void  _isr33();
 
-void idt_install()
+void isrs_install()
 {
-	idt_load();
-
 	idt_set_gate(0, KERNEL_CODE_SELECTOR, (uint32_t)&_isr0, 0x8E);
 	idt_set_gate(1, KERNEL_CODE_SELECTOR, (uint32_t)&_isr1, 0x8E);
 	idt_set_gate(2, KERNEL_CODE_SELECTOR, (uint32_t)&_isr2, 0x8E);
@@ -75,8 +74,49 @@ void idt_install()
 	idt_set_gate(32, KERNEL_CODE_SELECTOR, (uint32_t)&_isr33, 0x8E);
 }
 
-void fault_handler(int* ptr)
+void idt_install()
 {
+	idt_load();
+	isrs_install();
+	sti();
+}
+
+const char *exception_messages = 
+{
+	"Division By Zero",
+	"Debug Exception",
+	"No maskable Exception", 
+	"Breakpoint Exception",
+	"Overflow Exception", 
+	"Out of Bounds Exception",
+	"Invalid Opcode Exception",
+	"No Coprocessor Exception", 
+	"Double Fault Exception",
+	"Coprocessor Segment Overrun Exception",
+	"Bad TSS Exception",
+	"Segment Not Present",
+	"Stack fault Exception",
+	"General protection",
+	"Page fault",
+	"Unkonw",
+	"Coproessor Fault Exception",
+	"Align Check Exception",
+	"Machine Check Exception",
+	"Resverd"
+};
+
+void fault_handler(struct idt_info* ptr)
+{
+	if (ptr->code < 19)
+	{
+		terminal_printf("fault_handler:code=%d, error=%d, msg=%s",
+				ptr->code, ptr->error, exception_messages[ptr->code]);
+	}
+	else if (ptr->code < 32)
+	{
+		terminal_printf("fault_handler:code=%d, error=%d, msg=%s",
+				ptr->code, ptr->error, exception_messages[19]);
+	}
 }
 
 

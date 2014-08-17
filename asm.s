@@ -1,6 +1,8 @@
 	# file "asm.s"
 .text
 .globl	gdt_flush
+.globl	sti
+.globl	cli
 .type	gdt_flush, @function
 .equ	CODE_SELECTOR, 1 << 3
 .equ	DATA_SELECTOR, 2 << 3
@@ -15,3 +17,10 @@ gdt_flush:
 .FLUSH:
 	ret	
 
+cli:
+	cli
+	ret
+
+sti:
+	sti
+	ret

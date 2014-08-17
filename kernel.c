@@ -9,6 +9,7 @@ void kernel_main()
 {
 	gdt_install();
 	idt_load();
+	idt_install();
 	
 	terminal_initialize();
 	terminal_clearscreen();
