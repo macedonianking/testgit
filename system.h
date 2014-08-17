@@ -5,9 +5,9 @@
 
 void memcpy(void *dst, void *src, size_t count);
 
-void memset(uint8_t *ptr, uint8_t n, size_t count);
+void memset(void *ptr, int n, size_t count);
 
-void memsetw(uint16_t *ptr, uint16_t n, size_t count);
+void memsetw(void *ptr, int n, size_t count);
 
 uint8_t inportb(uint16_t port);
 void outportb(uint16_t port, uint8_t n);

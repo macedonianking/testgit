@@ -1,4 +1,6 @@
 #include "base.h"
+#include "system.h"
+
 #include "idt.h"
 
 static struct idt_gate idts[256];
@@ -19,6 +21,8 @@ void idt_set_gate(int i, uint16_t selector, uint32_t base, uint8_t access)
 
 void idt_load()
 {
+	memset(&idts, 0, sizeof(idts));
+
 	idtp.limit = 256 * sizeof(struct idt_gate) - 1;
 	idtp.base = (uint32_t) &idts;
 	__asm__ __volatile__("lidt %0"::"m"(idts));

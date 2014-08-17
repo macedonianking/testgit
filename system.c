@@ -13,16 +13,20 @@ void memcpy(void *dst, void *src, size_t count)
 	}
 }
 
-void memset(uint8_t *ptr, uint8_t n, size_t count)
+void memset(void *p, int n, size_t count)
 {
+	uint8_t *ptr;
+
+	ptr = (uint8_t*)p;	
 	while (count-- != 0)
 	{
 		*ptr++ = n;
 	}
 }
 
-void memsetw(uint16_t *ptr, uint16_t n, size_t count)
+void memsetw(void *p, int n, size_t count)
 {
+	uint16_t *ptr = (uint16_t*)p; 
 	while (count-- != 0)
 	{
 		*ptr++ = n;

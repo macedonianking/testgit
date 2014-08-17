@@ -25,5 +25,6 @@ _start:
 
 	cli
 .Lhang:
+	hlt
 	jmp		.Lhang
 .size _start, . - _start
