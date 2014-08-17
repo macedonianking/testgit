@@ -27,3 +27,5 @@ void idt_load()
 	idtp.base = (uint32_t) &idts;
 	__asm__ __volatile__("lidt %0"::"m"(idts));
 }
+
+

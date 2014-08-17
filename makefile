@@ -5,7 +5,9 @@ CFLAGS	:= -m32 -ffreestanding -nostdlib -Wall
 
 SRC_FILES := boot.s \
 	asm.s \
+	start.s \
 	kernel.c \
+	isrs.c \
 	terminal.c \
 	system.c \
 	vsprintf.c \

@@ -3,6 +3,9 @@
 
 #include "base.h"
 
+#define KERNEL_CODE_SELECTOR	(1 << 3)
+#define KERNEL_DATA_SELECTOR	(2 << 3)
+
 struct gdt_entry
 {
 	uint16_t		limit_low;
