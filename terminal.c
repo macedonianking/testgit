@@ -1,4 +1,5 @@
 #include "system.h"
+#include "vsnprintf.h"
 
 #include "terminal.h"
 

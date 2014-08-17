@@ -4,5 +4,6 @@
 extern void gdt_flush();
 extern void cli();
 extern void sti();
+extern void hlt();
 
 #endif

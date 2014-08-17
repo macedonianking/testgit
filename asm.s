@@ -3,6 +3,7 @@
 .globl	gdt_flush
 .globl	sti
 .globl	cli
+.globl	hlt	
 .type	gdt_flush, @function
 .equ	CODE_SELECTOR, 1 << 3
 .equ	DATA_SELECTOR, 2 << 3
@@ -23,4 +24,8 @@ cli:
 
 sti:
 	sti
+	ret
+
+hlt:
+	hlt
 	ret

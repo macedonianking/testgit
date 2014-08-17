@@ -1,5 +1,7 @@
 #include "base.h"
 #include "asm.h"
+#include "terminal.h"
+
 #include "idt.h"
 
 extern void  _isr0();
@@ -81,7 +83,7 @@ void idt_install()
 	sti();
 }
 
-const char *exception_messages = 
+const char *exception_messages[] = 
 {
 	"Division By Zero",
 	"Debug Exception",
@@ -103,19 +105,36 @@ const char *exception_messages =
 	"Align Check Exception",
 	"Machine Check Exception",
 	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
+	"Resverd"
 };
 
 void fault_handler(struct idt_info* ptr)
 {
-	if (ptr->code < 19)
+	if (ptr->code < 32)
 	{
-		terminal_printf("fault_handler:code=%d, error=%d, msg=%s",
-				ptr->code, ptr->error, exception_messages[ptr->code]);
+		die("fault_handler:%s, code=%d, error=%d\n",
+				exception_messages[ptr->code],
+				ptr->code, ptr->error);
 	}
-	else if (ptr->code < 32)
+
+	switch (ptr->code)
 	{
-		terminal_printf("fault_handler:code=%d, error=%d, msg=%s",
-				ptr->code, ptr->error, exception_messages[19]);
+		default:
+			{
+				terminal_printf("defualt isr handler:code=%d, error=%d\n",
+						ptr->code, ptr->error);
+			}
 	}
 }
 

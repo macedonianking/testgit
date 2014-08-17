@@ -12,6 +12,7 @@ void memsetw(void *ptr, int n, size_t count);
 uint8_t inportb(uint16_t port);
 void outportb(uint16_t port, uint8_t n);
 
-size_t strlen(const char *str);
+extern size_t strlen(const char *str);
 
+extern void die(const char *format, ...);
 #endif

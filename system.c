@@ -1,3 +1,7 @@
+#include "terminal.h"
+#include "asm.h"
+#include "vsnprintf.h"
+
 #include "system.h"
 
 void memcpy(void *dst, void *src, size_t count)
@@ -52,4 +56,20 @@ size_t strlen(const char *str)
 	for (ptr = str; *ptr != '\0'; ++ptr)
 		;
 	return ptr - str;
+}
+
+void die(const char *format, ...)
+{
+	char buf[MAX_BUFFER_SIZE];
+	va_list args;
+
+	va_start(args, format);
+	vsnprintf(buf, MAX_BUFFER_SIZE, format, args);
+	va_end(args);
+
+	terminal_putstring(buf);
+	for(;;)
+	{
+		hlt();
+	}
 }

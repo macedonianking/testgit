@@ -22,10 +22,10 @@ struct idt_pointer
 struct idt_info
 {
 	uint32_t	gs, fs, es, ds;
-	uint32_t	code, error;
 	uint32_t	edi, esi, ebp, esp;
 	uint32_t	ebx, edx, ecx, eax;
-	uint32_t	eip, cs, eflags, reseip, ress;
+	uint32_t	code, error;
+	uint32_t	eip, cs, eflags, reeip, ress;
 }__attribute__((packed));
 
 extern void idt_set_gate(int i, uint16_t selector, uint32_t addr, uint8_t access);

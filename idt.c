@@ -25,7 +25,7 @@ void idt_load()
 
 	idtp.limit = 256 * sizeof(struct idt_gate) - 1;
 	idtp.base = (uint32_t) &idts;
-	__asm__ __volatile__("lidt %0"::"m"(idts));
+	__asm__ __volatile__("lidt %0"::"m"(idtp));
 }
 
 
