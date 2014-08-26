@@ -23,7 +23,6 @@ _start:
 	mov		$stack_top, %esp
 	call	kernel_main
 
-	cli
 .Lhang:
 	hlt
 	jmp		.Lhang

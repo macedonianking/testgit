@@ -37,6 +37,24 @@
 .globl _isr33
 .globl fault_handler
 
+.globl irq0
+.globl irq1
+.globl irq2
+.globl irq3
+.globl irq4
+.globl irq5
+.globl irq6
+.globl irq7
+.globl irq8
+.globl irq9
+.globl irq10
+.globl irq11
+.globl irq12
+.globl irq13
+.globl irq14
+.globl irq15
+.globl irq_handler
+
 isr_common_stub:
 	cli
 	pusha
@@ -227,3 +245,109 @@ _isr33:
 	push	$0x00
 	push	$33
 	jmp		isr_common_stub
+
+irq_common_stub:
+	cli
+	pusha
+	push	%ds
+	push	%es
+	push	%fs
+	push	%gs
+	mov		$KERNEL_CODE_SEL, %ax
+	mov		%ax, %ds
+	mov		%ax, %es
+	mov		%ax, %fs
+	mov		%ax, %gs
+	mov		%esp, %eax
+	push	%eax
+	mov		$irq_handler, %eax
+	call	*%eax
+	pop		%eax
+	pop		%gs
+	pop		%fs
+	pop		%es
+	pop		%ds
+	popa
+	add		$8, %esp
+	iret
+
+irq0:
+	push	$0x00
+	push	$32
+	jmp		irq_common_stub
+
+irq1:
+	push	$0x00
+	push	$33
+	jmp		irq_common_stub
+
+irq2:
+	push	$0x00
+	push	$34
+	jmp		irq_common_stub
+
+irq3:
+	push	$0x00
+	push	$35
+	jmp		irq_common_stub
+
+irq4:
+	push	$0x00
+	push	$36
+	jmp		irq_common_stub
+
+irq5:
+	push	$0x00
+	push	$37
+	jmp		irq_common_stub
+
+irq6:
+	push	$0x00
+	push	$38
+	jmp		irq_common_stub
+
+irq7:
+	push	$0x00
+	push	$39
+	jmp		irq_common_stub
+
+irq8:
+	push	$0x00
+	push	$40
+	jmp		irq_common_stub
+
+irq9:
+	push	$0x00
+	push	$41
+	jmp		irq_common_stub
+
+irq10:
+	push	$0x00
+	push	$42
+	jmp		irq_common_stub
+
+irq11:
+	push	$0x00
+	push	$43
+	jmp		irq_common_stub
+
+irq12:
+	push	$0x00
+	push	$44
+	jmp		irq_common_stub
+
+irq13:
+	push	$0x00
+	push	$45
+	jmp		irq_common_stub
+
+irq14:
+	push	$0x00
+	push	$46
+	jmp		irq_common_stub
+
+irq15:
+	push	$0x00
+	push	$47
+	jmp		irq_common_stub
+

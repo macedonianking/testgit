@@ -28,10 +28,15 @@ struct idt_info
 	uint32_t	eip, cs, eflags, reeip, ress;
 }__attribute__((packed));
 
+typedef void (*irq_handler_impl)(struct idt_info*);
+
 extern void idt_set_gate(int i, uint16_t selector, uint32_t addr, uint8_t access);
 extern void idt_load();
 extern void idt_install();
 extern void isrs_install();
 extern void fault_handler(struct idt_info* ptr);
+extern void irq_handler(struct idt_info *ptr);
 
+extern void irq_install();
+extern void irq_set_handler(int i, void (*handler)(struct idt_info*));
 #endif

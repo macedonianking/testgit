@@ -1,8 +1,9 @@
+#include "idt.h"
+
 #include "base.h"
 #include "asm.h"
 #include "terminal.h"
-
-#include "idt.h"
+#include "system.h"
 
 extern void  _isr0();
 extern void  _isr1();
@@ -80,6 +81,7 @@ void idt_install()
 {
 	idt_load();
 	isrs_install();
+	irq_install();
 	sti();
 }
 
@@ -137,5 +139,4 @@ void fault_handler(struct idt_info* ptr)
 			}
 	}
 }
-
 

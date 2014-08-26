@@ -59,30 +59,44 @@ void terminal_settextcolor(uint8_t color)
 	terminal_color = color;
 }
 
+static void terminal_moveup()
+{
+	uint16_t blank;
+	int m;
+
+	blank = make_item(' ', terminal_color);
+	m = (VGA_H - 1) * VGA_W;
+	for (int i = 0; i < m; ++i)
+	{
+		terminal_buffer[i] = terminal_buffer[i + VGA_W];
+	}
+	for (int i = m; i < VGA_W * VGA_H; ++i)
+	{
+		terminal_buffer[i] = blank;
+	}
+}
+
 static void terminal_movescreen()
 {
-	uint16_t *src;
-	uint16_t *dst;
-	size_t	count;
-	uint16_t blank;
-
-	if (g_cursor_y >= 2 * VGA_H)
+	if (g_cursor_x < 0)
 	{
-		terminal_clearscreen();
+		g_cursor_x = 0;
+	} 
+	else if (g_cursor_x >= VGA_W)
+	{
+		g_cursor_x = VGA_W - 1;
+	}
+
+	if (g_cursor_y < 0)
+	{
+		g_cursor_y = 0;
 	}
 	else if (g_cursor_y >= VGA_H)
 	{
-		blank = make_item(' ', make_color(COLOR_GREY, COLOR_BLACK));
 		while (g_cursor_y >= VGA_H)
 		{
+			terminal_moveup();
 			--g_cursor_y;
-			dst = terminal_buffer;
-			src = terminal_buffer + VGA_W;
-			count = VGA_W * (VGA_H - 1);
-			memcpy(dst, src, count * 2);
-	
-			src = terminal_buffer + count;
-			memsetw(src, blank, VGA_W);		
 		}
 	}
 }
@@ -126,7 +140,7 @@ void terminal_putchar(char c)
 		default:
 			{
 				n = make_item(c, terminal_color);
-				index = VGA_H * g_cursor_y + g_cursor_x;
+				index = VGA_W * g_cursor_y + g_cursor_x;
 				terminal_buffer[index] = n;
 				
 				if (++g_cursor_x == VGA_W)
@@ -161,4 +175,17 @@ int terminal_printf(const char *format, ...)
 
 	terminal_putstring(buf);
 	return n;
+}
+
+void terminal_show_cursor()
+{
+	terminal_printf("x=%d, y=%d", g_cursor_x, g_cursor_y);
+}
+
+void terminal_test()
+{
+	for (int i =0; i < VGA_H; ++i)
+	{
+		terminal_printf("Hello world:%d\n", i);
+	}
 }

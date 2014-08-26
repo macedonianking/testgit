@@ -40,4 +40,6 @@ void terminal_putstring(const char *str);
 void terminal_settextcolor(uint8_t color);
 int  terminal_printf(const char *format, ...);
 
+void terminal_test();
+
 #endif

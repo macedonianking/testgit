@@ -1,13 +1,14 @@
 CC		:= gcc
 CFLAGS := -ffreestanding -nostdlib 
 QEMU 	:= qemu-system-i386
-CFLAGS	:= -m32 -ffreestanding -nostdlib -Wall
+CFLAGS	:= -m32 -ffreestanding -nostdlib -Wall -std=gnu99
 
 SRC_FILES := boot.s \
 	asm.s \
 	start.s \
 	kernel.c \
 	isrs.c \
+	irq.c \
 	terminal.c \
 	system.c \
 	vsprintf.c \
