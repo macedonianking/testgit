@@ -4,6 +4,7 @@
 #include "terminal.h"
 #include "gdt.h"
 #include "idt.h"
+#include "timer.h"
 
 void kernel_main()
 {
@@ -12,5 +13,5 @@ void kernel_main()
 	
 	terminal_initialize();
 	terminal_clearscreen();
-	terminal_test();
+	timer_install();
 }

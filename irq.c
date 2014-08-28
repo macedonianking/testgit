@@ -1,5 +1,6 @@
 #include "idt.h"
 
+#include "system.h"
 #include "terminal.h"
 
 extern void irq0();
@@ -31,13 +32,9 @@ static void test_irq0(struct idt_info *ptr);
 
 void irq_handler(struct idt_info* ptr)
 {
-	
-	irq_handler_impl func;
-
-	func = irq_routines[ptr->code - 32];	
-	if (func)
+	if (irq_routines[ptr->code - 32])
 	{
-		func(ptr);
+		irq_routines[ptr->code-32](ptr);
 	}
 
 	if (ptr->code >= 40)
@@ -74,13 +71,13 @@ void irq_install()
 	idt_set_gate(38, KERNEL_CODE_SELECTOR, (uint32_t)&irq6, 0x8e);
 	idt_set_gate(39, KERNEL_CODE_SELECTOR, (uint32_t)&irq7, 0x8e);
 	idt_set_gate(40, KERNEL_CODE_SELECTOR, (uint32_t)&irq8, 0x8e);
-	idt_set_gate(31, KERNEL_CODE_SELECTOR, (uint32_t)&irq9, 0x8e);
-	idt_set_gate(32, KERNEL_CODE_SELECTOR, (uint32_t)&irq10, 0x8e);
-	idt_set_gate(33, KERNEL_CODE_SELECTOR, (uint32_t)&irq11, 0x8e);
-	idt_set_gate(34, KERNEL_CODE_SELECTOR, (uint32_t)&irq12, 0x8e);
-	idt_set_gate(35, KERNEL_CODE_SELECTOR, (uint32_t)&irq13, 0x8e);
-	idt_set_gate(36, KERNEL_CODE_SELECTOR, (uint32_t)&irq14, 0x8e);
-	idt_set_gate(37, KERNEL_CODE_SELECTOR, (uint32_t)&irq15, 0x8e);
+	idt_set_gate(41, KERNEL_CODE_SELECTOR, (uint32_t)&irq9, 0x8e);
+	idt_set_gate(42, KERNEL_CODE_SELECTOR, (uint32_t)&irq10, 0x8e);
+	idt_set_gate(43, KERNEL_CODE_SELECTOR, (uint32_t)&irq11, 0x8e);
+	idt_set_gate(44, KERNEL_CODE_SELECTOR, (uint32_t)&irq12, 0x8e);
+	idt_set_gate(45, KERNEL_CODE_SELECTOR, (uint32_t)&irq13, 0x8e);
+	idt_set_gate(46, KERNEL_CODE_SELECTOR, (uint32_t)&irq14, 0x8e);
+	idt_set_gate(47, KERNEL_CODE_SELECTOR, (uint32_t)&irq15, 0x8e);
 
 	irq_set_handler(1, &test_irq0);
 }

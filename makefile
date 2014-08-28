@@ -14,7 +14,8 @@ SRC_FILES := boot.s \
 	vsprintf.c \
 	ctypes.c \
 	gdt.c \
-	idt.c
+	idt.c \
+	timer.c 
 
 OBJ_FILES := $(patsubst %.c,%.o,$(patsubst %.s,%.c,$(SRC_FILES)))
 BIN_FILES := myos.bin
