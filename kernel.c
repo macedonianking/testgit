@@ -5,6 +5,7 @@
 #include "gdt.h"
 #include "idt.h"
 #include "timer.h"
+#include "kdb.h"
 
 void kernel_main()
 {
@@ -14,4 +15,5 @@ void kernel_main()
 	terminal_initialize();
 	terminal_clearscreen();
 	timer_install();
+	kdb_install();
 }

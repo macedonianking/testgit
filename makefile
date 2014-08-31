@@ -15,7 +15,8 @@ SRC_FILES := boot.s \
 	ctypes.c \
 	gdt.c \
 	idt.c \
-	timer.c 
+	timer.c \
+	kdb.c
 
 OBJ_FILES := $(patsubst %.c,%.o,$(patsubst %.s,%.c,$(SRC_FILES)))
 BIN_FILES := myos.bin
